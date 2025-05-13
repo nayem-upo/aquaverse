@@ -4,10 +4,16 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const HeroSection = () => {
     // Sample text content for the slider
     const sliderData = [
+        {
+            text: "Transform Your Space with AquaVerse",
+            image: "https://images.unsplash.com/photo-1578507065211-1c4e99a5fd24?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            buttonText: "Shop Now"
+        },
         {
             text: "Welcome to AquaVerse",
             image: "https://images.unsplash.com/photo-1729544676664-fd2e8492db8e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -16,11 +22,6 @@ const HeroSection = () => {
         {
             text: "Explore Premium Aquarium Products",
             image: "https://images.unsplash.com/photo-1552461536-6c6fed9d94a2?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            buttonText: "Shop Now"
-        },
-        {
-            text: "Transform Your Space with AquaVerse",
-            image: "https://images.unsplash.com/photo-1578507065211-1c4e99a5fd24?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
             buttonText: "Shop Now"
         },
     ];
@@ -82,12 +83,12 @@ const HeroSection = () => {
                 </div>
 
                 {/* Button (Changes per slide) */}
-                <a
-                    href="#shop-now"
+                <Link
+                    href="/shop"
                     className="bg-[#EFC12F] text-xl font-semibold text-white py-3 px-6 rounded hover:bg-[#01B7DB] transition duration-300 mt-6"
                 >
                     {sliderData[currentIndex].buttonText}
-                </a>
+                </Link>
             </div>
         </section>
     );

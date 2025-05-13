@@ -1,8 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { products } from '../static data/products';
 import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearchPlus } from '@fortawesome/free-solid-svg-icons';
 
 const ProductDetail = ({ id }: { id: string }) => {
     const [quantity, setQuantity] = useState(1);
@@ -10,6 +13,8 @@ const ProductDetail = ({ id }: { id: string }) => {
     const product = products.find(p => p.id === id);
 
     const [mainImage, setMainImage] = useState(product?.images?.[0] || '');
+    const imageRef = useRef<HTMLDivElement>(null);
+    const lensRef = useRef<HTMLDivElement>(null);
 
     if (!product) {
         return <div className="px-8 py-20 text-center text-red-500">Product not found.</div>;
@@ -19,19 +24,72 @@ const ProductDetail = ({ id }: { id: string }) => {
         setQuantity(prev => (type === 'inc' ? prev + 1 : Math.max(1, prev - 1)));
     };
 
+    const handleMouseMove = (e: React.MouseEvent) => {
+        const imageContainer = imageRef.current;
+        const zoomedImage = imageContainer?.querySelector('img');
+
+        if (imageContainer && zoomedImage) {
+            const { left, top, width, height } = imageContainer.getBoundingClientRect();
+            const offsetX = e.clientX - left;
+            const offsetY = e.clientY - top;
+
+            const zoomScale = 1.7;
+
+            zoomedImage.style.transform = `scale(${zoomScale})`;
+            zoomedImage.style.transformOrigin = `${(offsetX / width) * 100}% ${(offsetY / height) * 100}%`;
+        }
+    };
+
+    const handleMouseLeave = () => {
+        const zoomedImage = imageRef.current?.querySelector('img');
+        if (zoomedImage) {
+            zoomedImage.style.transform = 'scale(1)';
+        }
+    };
+
+    const handleMouseEnter = () => {
+        const lens = lensRef.current;
+        if (lens) {
+            lens.style.visibility = 'visible'; // Show lens on hover
+        }
+    };
+
+
     return (
         <div className="px-8 lg:px-32 py-20 bg-white pt-36">
             <div className="flex flex-col lg:flex-row gap-12">
                 {/* Image Section */}
-                <div className="flex-1">
-                    <div className="overflow-hidden group rounded-xl">
-                        <Image
-                            src={mainImage}
-                            alt={product.name}
-                            width={600}
-                            height={600}
-                            className="rounded-xl object-cover transition-transform duration-300 group-hover:scale-105"
-                        />
+                <div
+                >
+                    <div
+                        ref={imageRef}
+                        className="relative w-[500px] h-[500px] overflow-hidden rounded-xl"
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                        onMouseMove={handleMouseMove}
+                    >
+                        <AnimatePresence mode="wait">
+                            <motion.img
+                                key={mainImage}
+                                src={mainImage}
+                                alt={product.name}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.3 }}
+                                className="object-cover w-full h-full rounded-xl absolute transition-transform duration-300"
+                            />
+                        </AnimatePresence>
+                        <div className="absolute top-4 right-4 rounded-full">
+                            <FontAwesomeIcon icon={faSearchPlus} className="text-xl text-[#01B7DB]" />
+                        </div>
+
+                        <div
+                            ref={lensRef}
+                            className="absolute pointer-events-none"
+                            style={{ visibility: 'hidden' }}
+                        ></div>
+
                     </div>
 
                     {/* Thumbnails */}
@@ -68,19 +126,19 @@ const ProductDetail = ({ id }: { id: string }) => {
                     {/* Quantity + Buttons */}
                     <div className="flex items-center gap-4 mt-4">
                         <div className="flex items-center border border-gray-300 rounded-md overflow-hidden">
-                            <button onClick={() => handleQuantityChange('dec')} className="px-3 py-1 text-xl font-bold bg-gray-100 hover:bg-gray-200">−</button>
-                            <div className="px-5 py-2">{quantity}</div>
-                            <button onClick={() => handleQuantityChange('inc')} className="px-3 py-1 text-xl font-bold bg-gray-100 hover:bg-gray-200">+</button>
+                            <button onClick={() => handleQuantityChange('dec')} className="cursor-pointer duration-300 px-3 py-2 text-xl font-bold bg-gray-100 hover:bg-gray-200">−</button>
+                            <div className="px-5 py-2 w-16 text-center">{quantity}</div>
+                            <button onClick={() => handleQuantityChange('inc')} className="cursor-pointer duration-300 px-3 py-2 text-xl font-bold bg-gray-100 hover:bg-gray-200">+</button>
                         </div>
 
-                        <button className="bg-[#01B7DB] hover:bg-[#0099c5] text-white font-bold py-3 px-8 rounded-lg transition-all">
+                        <button className="bg-[#01B7DB] hover:bg-[#0099c5] duration-300 text-white cursor-pointer font-bold py-3 px-8 rounded-lg transition-all">
                             BUY NOW
                         </button>
                     </div>
 
                     <div className="flex gap-4 mt-4">
-                        <button className="border border-[#01B7DB] text-[#01B7DB] px-6 py-2 rounded hover:bg-[#01B7DB] hover:text-white">Compare</button>
-                        <button className="border border-[#01B7DB] text-[#01B7DB] px-6 py-2 rounded hover:bg-[#01B7DB] hover:text-white">Add to Wishlist</button>
+                        <button className="cursor-pointer border duration-300 border-[#01B7DB] text-[#01B7DB] px-6 py-2 rounded hover:bg-[#01B7DB] hover:text-white">Compare</button>
+                        <button className="cursor-pointer border duration-300 border-[#01B7DB] text-[#01B7DB] px-6 py-2 rounded hover:bg-[#01B7DB] hover:text-white">Add to Wishlist</button>
                     </div>
 
                     <div className="mt-6 text-sm text-gray-500 space-y-1">
@@ -99,7 +157,7 @@ const ProductDetail = ({ id }: { id: string }) => {
                         <button
                             key={tab}
                             onClick={() => setActiveTab(tab as typeof activeTab)}
-                            className={`pb-2 font-semibold capitalize ${activeTab === tab ? 'text-[#182052] border-b-2 border-[#182052]' : 'text-gray-500 hover:text-[#182052]'}`}
+                            className={`pb-2 font-semibold capitalize cursor-pointer ${activeTab === tab ? 'text-[#182052] border-b-2 border-[#182052]' : 'text-gray-500 hover:text-[#182052]'}`}
                         >
                             {tab === 'additional' ? 'Additional Information' : tab === 'reviews' ? 'Reviews (0)' : 'Description'}
                         </button>

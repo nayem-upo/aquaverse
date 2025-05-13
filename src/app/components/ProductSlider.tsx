@@ -26,11 +26,11 @@ const ProductSlider = () => {
             <div className="mx-32 px-4">
                 <div className="flex gap-16 items-center justify-between">
                     <div className="flex gap-4">
-                        <button onClick={prevSlide} className="...">
-                            <FontAwesomeIcon icon={faChevronLeft} />
+                        <button onClick={prevSlide} className="px-6 py-4 cursor-pointer border-2 duration-300 border-[#01B7DB] text-[#01B7DB] rounded-full hover:bg-[#01B7DB] hover:text-white">
+                            <FontAwesomeIcon icon={faChevronLeft} className="size-10" />
                         </button>
-                        <button onClick={nextSlide} className="...">
-                            <FontAwesomeIcon icon={faChevronRight} />
+                        <button onClick={nextSlide} className="px-6 py-4 cursor-pointer border-2 duration-300 border-[#01B7DB] text-[#01B7DB] rounded-full hover:bg-[#01B7DB] hover:text-white">
+                            <FontAwesomeIcon icon={faChevronRight} className="size-10" />
                         </button>
                     </div>
 
@@ -41,13 +41,14 @@ const ProductSlider = () => {
                                 <div key={idx} className="w-1/3 h-[400px] bg-white flex-shrink-0 px-2">
                                     <Link href={`/products/${product.id}`}>
                                         <img
-                                            src={product.image}
+                                            src={product.images[0]} // ✅ Corrected line
                                             alt={product.name}
                                             className="object-cover p-10 w-full h-full rounded-lg cursor-pointer hover:scale-125 duration-500"
                                         />
                                     </Link>
                                 </div>
                             ))}
+
                         </div>
                     </div>
                 </div>

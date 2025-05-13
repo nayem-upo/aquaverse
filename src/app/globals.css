@@ -13,6 +13,41 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* Style for the thumb (the draggable part) */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;  /* For Safari */
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #01B7DB;  /* Thumb color */
+    border-radius: 50%;  /* Make it round */
+    cursor: pointer;  /* Pointer cursor */
+}
+
+/* For Firefox */
+input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #01B7DB;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* For Internet Explorer */
+input[type="range"]::-ms-thumb {
+    width: 20px;
+    height: 20px;
+    background: #01B7DB;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Change the color of the track when the slider is being used */
+input[type="range"]:focus {
+    background: #01B7DB; /* Change track color on focus */
+}
+
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #ededed;

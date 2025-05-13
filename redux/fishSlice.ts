@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+// redux/fishSlice.ts
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-// Define types for the state
 interface FishState {
     fishes: string[];
 }
@@ -10,7 +10,7 @@ const initialState: FishState = {
 };
 
 const fishSlice = createSlice({
-    name: "fish",
+    name: 'fish',
     initialState,
     reducers: {
         setFishes: (state, action: PayloadAction<string[]>) => {

@@ -1,18 +1,24 @@
 'use client';
 
-import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../redux/store';  // Ensure the correct path to your store
+import Image from 'next/image';
 
 const Navbar = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const pathname = usePathname();
     const isHome = pathname === '/';
+
+    // Access cart items from Redux store
+    const cartItems = useSelector((state: RootState) => state.cart.items);
+    const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -52,11 +58,17 @@ const Navbar = () => {
                 </Link>
 
                 {/* Cart Icon (Right) */}
-                <div className={`text-2xl cursor-pointer ${menuColor}`}>
+                <div className={`relative text-2xl cursor-pointer ${menuColor}`}>
                     <FontAwesomeIcon
                         icon={faCartShopping}
                         className="text-2xl cursor-pointer hover:text-[#01B7DB] duration-200"
                     />
+                    {/* Cart Item Count */}
+                    {cartItemCount > 0 && (
+                        <span className="absolute top-0 right-0 w-5 h-5 text-xs font-semibold text-white bg-red-500 rounded-full flex items-center justify-center">
+                            {cartItemCount}
+                        </span>
+                    )}
                 </div>
             </nav>
 
