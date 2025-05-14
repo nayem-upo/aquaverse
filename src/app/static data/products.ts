@@ -2,7 +2,7 @@ export const products = [
     {
         id: "1",
         name: "Half Moon Betta Fish",
-        price: "$7.00 – $22.00",
+        price: "250",
         category: "Half Moon Fish",
         images: [
             "https://aqualots.themerex.net/wp-content/uploads/2017/11/shop-2-copyright.jpg",
@@ -16,7 +16,7 @@ export const products = [
     {
         id: "2",
         name: "Crowntail Betta",
-        price: "$10.00 – $25.00",
+        price: "200",
         category: "Crowntail Fish",
         images: [
             "https://aqualots.themerex.net/wp-content/uploads/2017/11/shop-1-copyright.jpg",
@@ -31,7 +31,7 @@ export const products = [
         id: "3",
         name: "Plakat Betta",
         category: "Plakat Fish",
-        price: "$9.00 – $19.00",
+        price: "200",
         images: [
             "https://www.aquapets.ca/cdn/shop/files/DSC01364.jpg?v=1698290881&width=1946",
             "https://aqualots.themerex.net/wp-content/uploads/2017/11/shop-3-copyright.jpg",
@@ -45,7 +45,7 @@ export const products = [
         id: "4",
         name: "Plakat Betta",
         category: "Plakat Fish",
-        price: "$9.00 – $19.00",
+        price: "200",
         images: [
             "https://kolathurfishmarket.com/uploads/all/NvSVit03R7RXJWwQ31VDmlahhfBXFs7s6W3hLQPK.jpg",
             "https://aqualots.themerex.net/wp-content/uploads/2017/11/shop-3-copyright.jpg",
@@ -59,7 +59,7 @@ export const products = [
         id: "8",
         name: "Plakat Betta",
         category: "Plakat Fish",
-        price: "$9.00 – $19.00",
+        price: "200",
         images: [
             "https://aqualots.themerex.net/wp-content/uploads/2017/11/shop-3-copyright.jpg",
             "https://kolathurfishmarket.com/uploads/all/NvSVit03R7RXJWwQ31VDmlahhfBXFs7s6W3hLQPK.jpg",
@@ -73,7 +73,7 @@ export const products = [
         id: "5",
         name: "Plakat Betta",
         category: "Plakat Fish",
-        price: "$9.00 – $19.00",
+        price: "200",
         images: [
             "https://aqualots.themerex.net/wp-content/uploads/2017/11/shop-3-copyright.jpg",
             "https://kolathurfishmarket.com/uploads/all/NvSVit03R7RXJWwQ31VDmlahhfBXFs7s6W3hLQPK.jpg",
@@ -87,7 +87,7 @@ export const products = [
         id: "6",
         name: "Plakat Betta",
         category: "Plakat Fish",
-        price: "$9.00 – $19.00",
+        price: "200",
         images: [
             "https://aqualots.themerex.net/wp-content/uploads/2017/11/shop-3-copyright.jpg",
             "https://kolathurfishmarket.com/uploads/all/NvSVit03R7RXJWwQ31VDmlahhfBXFs7s6W3hLQPK.jpg",
@@ -101,7 +101,7 @@ export const products = [
         id: "7",
         name: "Plakat Betta",
         category: "Plakat Fish",
-        price: "$9.00 – $19.00",
+        price: "200",
         images: [
             "https://aqualots.themerex.net/wp-content/uploads/2017/11/shop-3-copyright.jpg",
             "https://kolathurfishmarket.com/uploads/all/NvSVit03R7RXJWwQ31VDmlahhfBXFs7s6W3hLQPK.jpg",

@@ -27,10 +27,10 @@ const ProductSlider = () => {
                 <div className="flex gap-16 items-center justify-between">
                     <div className="flex gap-4">
                         <button onClick={prevSlide} className="px-6 py-4 cursor-pointer border-2 duration-300 border-[#01B7DB] text-[#01B7DB] rounded-full hover:bg-[#01B7DB] hover:text-white">
-                            <FontAwesomeIcon icon={faChevronLeft} className="size-10" />
+                            <FontAwesomeIcon icon={faChevronLeft} className="" />
                         </button>
                         <button onClick={nextSlide} className="px-6 py-4 cursor-pointer border-2 duration-300 border-[#01B7DB] text-[#01B7DB] rounded-full hover:bg-[#01B7DB] hover:text-white">
-                            <FontAwesomeIcon icon={faChevronRight} className="size-10" />
+                            <FontAwesomeIcon icon={faChevronRight} className="" />
                         </button>
                     </div>
 

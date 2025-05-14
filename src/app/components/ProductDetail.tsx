@@ -6,6 +6,9 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearchPlus } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../../redux/cartSlice';
+import { useRouter } from 'next/navigation';
 
 const ProductDetail = ({ id }: { id: string }) => {
     const [quantity, setQuantity] = useState(1);
@@ -15,6 +18,8 @@ const ProductDetail = ({ id }: { id: string }) => {
     const [mainImage, setMainImage] = useState(product?.images?.[0] || '');
     const imageRef = useRef<HTMLDivElement>(null);
     const lensRef = useRef<HTMLDivElement>(null);
+    const dispatch = useDispatch();
+    const router = useRouter();
 
     if (!product) {
         return <div className="px-8 py-20 text-center text-red-500">Product not found.</div>;
@@ -52,6 +57,17 @@ const ProductDetail = ({ id }: { id: string }) => {
         if (lens) {
             lens.style.visibility = 'visible'; // Show lens on hover
         }
+    };
+
+    // Handle "Buy Now" functionality
+    const handleBuyNow = () => {
+        if (!product) return; // Ensure the product exists
+        dispatch(addToCart({
+            ...product,
+            quantity,
+            image: product.images[0], // Use the first image as the cart image
+        }));
+        router.push('/cart'); // Redirect to the cart page
     };
 
 
@@ -131,7 +147,11 @@ const ProductDetail = ({ id }: { id: string }) => {
                             <button onClick={() => handleQuantityChange('inc')} className="cursor-pointer duration-300 px-3 py-2 text-xl font-bold bg-gray-100 hover:bg-gray-200">+</button>
                         </div>
 
-                        <button className="bg-[#01B7DB] hover:bg-[#0099c5] duration-300 text-white cursor-pointer font-bold py-3 px-8 rounded-lg transition-all">
+                        {/* Updated BUY NOW Button */}
+                        <button
+                            onClick={handleBuyNow} // On click, call handleBuyNow
+                            className="bg-[#01B7DB] hover:bg-[#0099c5] duration-300 text-white cursor-pointer font-bold py-3 px-8 rounded-lg transition-all"
+                        >
                             BUY NOW
                         </button>
                     </div>

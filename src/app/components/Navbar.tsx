@@ -17,8 +17,9 @@ const Navbar = () => {
     const isHome = pathname === '/';
 
     // Access cart items from Redux store
-    const cartItems = useSelector((state: RootState) => state.cart.items);
-    const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+    // const cartItems = useSelector((state: RootState) => state.cart.items);
+    const cartItemCount = useSelector((state: RootState) => state.cart.items.length);
+
 
     useEffect(() => {
         const handleScroll = () => {
@@ -58,18 +59,18 @@ const Navbar = () => {
                 </Link>
 
                 {/* Cart Icon (Right) */}
-                <div className={`relative text-2xl cursor-pointer ${menuColor}`}>
+                <Link href={"/cart"} className={`relative text-2xl cursor-pointer ${menuColor}`}>
                     <FontAwesomeIcon
                         icon={faCartShopping}
                         className="text-2xl cursor-pointer hover:text-[#01B7DB] duration-200"
                     />
                     {/* Cart Item Count */}
                     {cartItemCount > 0 && (
-                        <span className="absolute top-0 right-0 w-5 h-5 text-xs font-semibold text-white bg-red-500 rounded-full flex items-center justify-center">
+                        <span className="absolute bottom-5 left-5 w-5 h-5 text-xs font-semibold text-white bg-red-500 rounded-full flex items-center justify-center">
                             {cartItemCount}
                         </span>
                     )}
-                </div>
+                </Link>
             </nav>
 
             {/* Animated Full-Screen Menu */}
@@ -99,8 +100,10 @@ const Navbar = () => {
                                 <Link href="/">Home</Link>
                             </li>
                             <li className="hover:text-[#01B7DB] duration-200 cursor-pointer hover:scale-105" onClick={() => setMenuOpen(false)}>About Us</li>
-                            <li className="hover:text-[#01B7DB] duration-200 cursor-pointer hover:scale-105" onClick={() => setMenuOpen(false)}>Shop Now</li>
-                            <li className="hover:text-[#01B7DB] duration-200 cursor-pointer hover:scale-105" onClick={() => setMenuOpen(false)}>Contact Us</li>
+                            <li className="hover:text-[#01B7DB] duration-200 cursor-pointer hover:scale-105" onClick={() => setMenuOpen(false)}><Link href={"/shop"}>Shop Now</Link></li>
+                            <li className="hover:text-[#01B7DB] duration-200 cursor-pointer hover:scale-105" onClick={() => setMenuOpen(false)}>
+                                <Link href="/contact">Contact Us</Link>
+                            </li>
                         </ul>
                     </motion.div>
                 )}
